@@ -55,7 +55,34 @@
         </div>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
+<script>
+const API = "https://www.themealdb.com/api/json/v1/1/";
+const results = document.getElementById("results");
+const emptyMsg = document.getElementById("emptyMsg");
+
+let currentMeal = null;
+
+function getFavs() {
+    try { return JSON.parse(localStorage.getItem("favs") || "[]"); }
+    catch (e) { return []; }
+}
+function saveFavs(list) {
+    localStorage.setItem("favs", JSON.stringify(list));
+}
+
+document.getElementById("searchForm").addEventListener("submit", async e => {
+    e.preventDefault();
+    const q = document.getElementById("q").value.trim();
+    if (!q) return;
+
+    const data = await fetch(API + "search.php?s=" + encodeURIComponent(q)).then(r => r.json());
+    showResults(data.meals || []);
+});
+
+
+</script>
 
 
 </body>
