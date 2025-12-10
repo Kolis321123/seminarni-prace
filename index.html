@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="cs">
+<head>
+    <meta charset="utf-8">
+    <title>Vyhledávač receptů</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        <span class="navbar-brand">Recepty</span>
+
+        <form id="searchForm" class="d-flex">
+            <input id="q" class="form-control me-2" type="search" placeholder="Hledat…">
+            <button class="btn btn-light" type="submit">Hledat</button>
+        </form>
+
+        <button id="showFavs" class="btn btn-warning ms-3">Oblíbené</button>
+    </div>
+</nav>
+
+<div class="container mt-4">
+
+    <div id="results" class="row g-3"></div>
+
+    <p id="emptyMsg" class="text-center text-muted mt-5">
+        Zadej název receptu a klikni na Hledat.
+    </p>
+</div>
+
+<div class="modal fade" id="detailModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="detailTitle"></h5>
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <img id="detailImg" class="img-fluid rounded mb-3" style="max-height:300px; object-fit:cover;">
+                <h6>Ingredience</h6>
+                <ul id="detailIng"></ul>
+                <h6>Postup</h6>
+                <p id="detailInstr"></p>
+            </div>
+
+            <div class="modal-footer">
+                <button id="saveFav" class="btn btn-success">Uložit do oblíbených</button>
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Zavřít</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>
