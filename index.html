@@ -81,6 +81,32 @@ document.getElementById("searchForm").addEventListener("submit", async e => {
     showResults(data.meals || []);
 });
 
+function showResults(list) {
+    results.innerHTML = "";
+    emptyMsg.style.display = list.length ? "none" : "block";
+
+    list.forEach(m => {
+        const col = document.createElement("div");
+        col.className = "col-md-3";
+
+        col.innerHTML = `
+            <div class="card h-100">
+                <img src="${m.strMealThumb}" class="card-img-top" style="height:160px; object-fit:cover;">
+                <div class="card-body d-flex flex-column">
+                    <h6 class="card-title">${m.strMeal}</h6>
+                    <div class="mt-auto">
+                        <button class="btn btn-primary btn-sm me-2" data-id="${m.idMeal}" data-action="detail">Detail</button>
+                        <button class="btn btn-outline-success btn-sm" data-id="${m.idMeal}" data-action="fav">♥</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        col.querySelector('[data-action="detail"]').addEventListener('click', () => openDetail(m.idMeal));
+        col.querySelector('[data-action="fav"]').addEventListener('click', () => addToFavs(m));
+        results.appendChild(col);
+    });
+}
+
 
 </script>
 
