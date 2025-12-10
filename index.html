@@ -107,6 +107,34 @@ function showResults(list) {
     });
 }
 
+async function openDetail(id) {
+    const url = API + "lookup.php?i=" + encodeURIComponent(id);
+    const data = await fetch(url).then(r => r.json());
+    const m = data.meals && data.meals[0];
+    if (!m) { alert('Detail nelze načíst.'); return; }
+    currentMeal = m;
+
+    document.getElementById("detailTitle").innerText = m.strMeal || "";
+    document.getElementById("detailImg").src = m.strMealThumb || "";
+
+    const ingList = document.getElementById("detailIng");
+    ingList.innerHTML = "";
+    for (let i = 1; i <= 20; i++) {
+        const ing = m["strIngredient" + i];
+        const meas = m["strMeasure" + i];
+        if (ing && ing.trim()) {
+            const li = document.createElement("li");
+            li.innerText = (meas ? meas.trim() + " " : "") + ing.trim();
+            ingList.appendChild(li);
+        }
+    }
+
+    document.getElementById("detailInstr").innerText = m.strInstructions || "";
+
+    new bootstrap.Modal(document.getElementById("detailModal")).show();
+}
+
+
 
 </script>
 
